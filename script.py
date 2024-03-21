@@ -11,4 +11,4 @@ if __name__ == '__main__':
     print(countryData.dtypes)
 
     for col in countryData: 
-    if(countryData[col].dtype != "object"): print(f'colonne: {col}, nbr_zéro: {(countryData[col] == 0).sum()}, min: {countryData[col].min()}, max: {countryData[col].max()}, médian: {countryData[col].median()}, moyenne: {countryData[col].mean()}')
+        if(countryData[col].dtype != "object"): print('<@\\textcolor{cyan}{'+ col + 's}@> => nbr_zéro: <@\\textcolor{blue}{' + str((countryData[col] == 0).sum()) + '}@> , min: <@\\textcolor{blue}{' + str(countryData[col].min()) + '}@>, max: <@\\textcolor{blue}{' + str(countryData[col].max()) + '}@>, median: <@\\textcolor{blue}{' + str(countryData[col].median()) + '}@>, mean: <@\\textcolor{blue}{' + str(countryData[col].mean()) + '}@>')
