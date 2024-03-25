@@ -1,10 +1,11 @@
 import pandas as pd
 
 # Charger les données pour obtenir les valeurs maximales et minimales pour chaque critère
-data_df = pd.read_csv('Fat_Data.csv', index_col = 0)
+data_df = pd.read_csv('Donnees/Fat_Data.csv', index_col = 0)
+data_weight = pd.read_csv('Donnees/Fat_poids.csv', index_col = 0)
 
 # Calculer la plage des valeurs pour chaque critère
-range_values = (data_df.max() - data_df.min()).round(5)
+range_values = (data_df.median()).round(5)
 # Profil 1 (plus grande importance sur les fruits et légumes) :
 # les seuils doivent être faibles pour les critères relatifs aux fruits et légumes pour que même de petites différences
 # puissent être significatives, et plus élevés pour les catégories de viande pour minimiser leur impact.
@@ -28,15 +29,26 @@ categorie_mapping = {
     'Viande': ['Meat', 'Offals', 'Animal Products', 'Fish, Seafood', 'Animal fats', 'Eggs']
 }
 
+# Définir les seuils en pourcentage pour chaque profil en fonction de enverser la proportion de leur préférence (poids)
+seuil_profil1_favoris = data_weight.min(axis=1)['Profil 1']
+seuil_profil1_non_favoris = data_weight.max(axis=1)['Profil 1']
+seuil_profil3_favoris = data_weight.min(axis=1)['Profil 3']
+seuil_profil3_non_favoris = data_weight.max(axis=1)['Profil 3']
+default_seuil = data_weight.mean(axis=1)['Profil 2']
+
 # Fonction pour déterminer le seuil pour un critère donné
 def determine_seuil(critere, profil):
     for categorie, criteres in categorie_mapping.items():
         if critere in criteres:
             if profil == 1 and categorie in ['Fruits', 'Legumes']:
-                return range_values[critere] * seuil_profil1
+                return range_values[critere] * seuil_profil1_favoris
+            elif profil == 1 and categorie == 'Viande':
+                return range_values[critere] * seuil_profil1_non_favoris
             elif profil == 3 and categorie == 'Viande':
                 return range_values[critere] * seuil_profil3
-    return range_values[critere] * (seuil_profil2 if profil == 2 else default_seuil)
+            elif profil == 3 and categorie == ['Fruits', 'Legumes']:
+                return range_values[critere] * seuil_profil3
+    return range_values[critere] * default_seuil
 
 # Calculer les seuils pour chaque profil et critère
 seuils_profil1 = {critere: determine_seuil(critere, 1) for critere in data_df.columns[0:]}
