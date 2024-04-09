@@ -84,9 +84,9 @@ seuils_profil3 = {
 seuils_df = (
     pd.DataFrame(
         {
-            "Seuil 1": seuils_profil1,
-            "Seuil 2": seuils_profil2,
-            "Seuil 3": seuils_profil3,
+            "Profil 1": seuils_profil1,
+            "Profil 2": seuils_profil2,
+            "Profil 3": seuils_profil3,
         }
     )
     .round(5)
