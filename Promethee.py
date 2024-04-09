@@ -2,13 +2,13 @@ import pandas as pd
 import numpy as np
 
 # Charger les fichiers CSV dans des DataFrames pandas
-# data_path = 'Test_Data.csv'
-# weights_path = 'Test_poids.csv'
-# objectives_path = 'Test_objective.csv'
+# data_path = 'Donnees/Test_Data.csv'
+# weights_path = 'Donnees/Test_poids.csv'
+# objectives_path = 'Donnees/Test_objective.csv'
 
-data_path = 'Fat_Data.csv'
-weights_path = 'Fat_poids.csv'
-objectives_path = 'Fat_objective.csv'
+data_path = 'Donnees/Fat_Data.csv'
+weights_path = 'Donnees/Fat_poids.csv'
+objectives_path = 'Donnees/Fat_objective.csv'
 
 
 # Lecture des fichiers CSV
@@ -91,13 +91,17 @@ for profile, pref_df in preferences_profiles.items():
     print(pref_df)
     print('\n')
 
-# Afficher les classements pour chaque profil
 for profile, rankings in rankings_profiles.items():
-    print(f'Classement pour {profile}:')
-    print('Classement Flux Positif:')
-    print(rankings['Positive Flow Ranking'])
-    print('Classement Flux Négatif:')
-    print(rankings['Negative Flow Ranking'])
-    print('Classement Flux Net:')
-    print(rankings['Net Flow Ranking'])
-    print('\n')
+    base_path = 'Resultats/Promethee_I/'
+    
+    # Nom des fichiers basé sur le profil
+    positive_flow_filename = f'{base_path}{profile}_Classement_Flux_Positif.csv'
+    negative_flow_filename = f'{base_path}{profile}_Classement_Flux_Négatif.csv'
+    net_flow_filename = f'{base_path}{profile}_Classement_Flux_Net.csv'
+    
+    # Enregistrer les DataFrame dans des fichiers CSV
+    rankings['Positive Flow Ranking'].to_csv(positive_flow_filename, index=True, header=["Score"], index_label="Country")
+    rankings['Negative Flow Ranking'].to_csv(negative_flow_filename, index=True, header=["Score"], index_label="Country")
+    rankings['Net Flow Ranking'].to_csv(net_flow_filename, index=True, header=["Score"], index_label="Country")
+
+    print(f'Les classements pour {profile} ont été enregistrés.')
