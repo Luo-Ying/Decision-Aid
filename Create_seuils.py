@@ -92,4 +92,4 @@ seuils_df = (
     .round(5)
     .T
 )
-seuils_df.to_csv("Fat_seuils.csv", index_label="Seuils")
+seuils_df.to_csv("Donnees/Fat_seuils.csv", index_label="Seuils")
