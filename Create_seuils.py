@@ -6,6 +6,7 @@ data_weight = pd.read_csv("Donnees/Fat_poids.csv", index_col=0)
 
 # Calculer la plage des valeurs pour chaque critère
 range_values = (data_df.median()).round(5)
+print(range_values)
 # Profil 1 (plus grande importance sur les fruits et légumes) :
 # les seuils doivent être faibles pour les critères relatifs aux fruits et légumes pour que même de petites différences
 # puissent être significatives, et plus élevés pour les catégories de viande pour minimiser leur impact.
@@ -17,10 +18,10 @@ range_values = (data_df.median()).round(5)
 # leur impact relatif.
 
 # Définir les seuils en pourcentage pour chaque profil
-seuil_profil1 = 0.05
-seuil_profil2 = 0.10
-seuil_profil3 = 0.05
-default_seuil = 0.15
+# seuil_profil1 = 0.05
+# seuil_profil2 = 0.10
+# seuil_profil3 = 0.05
+# default_seuil = 0.15
 
 # Mapping des critères par catégorie (à adapter avec les vrais noms des critères)
 categorie_mapping = {
@@ -64,9 +65,9 @@ def determine_seuil(critere, profil):
             elif profil == 1 and categorie == "Viande":
                 return range_values[critere] * seuil_profil1_non_favoris
             elif profil == 3 and categorie == "Viande":
-                return range_values[critere] * seuil_profil3
+                return range_values[critere] * seuil_profil3_favoris
             elif profil == 3 and categorie == ["Fruits", "Legumes"]:
-                return range_values[critere] * seuil_profil3
+                return range_values[critere] * seuil_profil3_non_favoris
     return range_values[critere] * default_seuil
 
 
