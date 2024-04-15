@@ -166,7 +166,7 @@ def main():
         
         core[profil] = getCore(outrank[profil])
         
-        df_outrank = pd.DataFrame(outrank[profil], columns=['start', 'end'])
+        df_outrank = pd.DataFrame(outrank[profil], columns=['From', 'To'])
         df_outrank.to_csv(f'Resultats/Electre/{profil}_outrank.csv', index=False)
         
         df_core = pd.DataFrame(core[profil], columns=['core'])
