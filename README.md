@@ -6,7 +6,7 @@ Le méthodes qui sont inclus dans ce projet sont notamment: la somme pondérée,
 
 Le jeu de données sur lequel les divers méthodes ont pu être testé sont des données du site Kaggle. Il s'agit du [COVID-19 Healthy Diet Dataset](https://www.kaggle.com/datasets/mariaren/covid19-healthy-diet-dataset?select=Fat_Supply_Quantity_Data.csv).
 
-Un rapport réalisé en analysant les résultats obtenus : [Rappport d'analyse](Resultats\Rapport_Aide_a_la_decision_Marie_ZEPHIR_Yingqi_LUO.pdf)
+Un rapport réalisé en analysant les résultats obtenus : [Rappport d'analyse](./Resultats/Rapport_Aide_a_la_decision_Marie_ZEPHIR_Yingqi_LUO.pdf)
 
 ## Organisation
 - `Electre.py` : Méthode ELECTRE Is sans application des seuils de veto.
